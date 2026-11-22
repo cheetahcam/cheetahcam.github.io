@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CheetahCam Privacy Policy</title><link rel="icon" href="img/icon.png">
+<style>body{margin:0;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:#FFF7EE;color:#2B1E14;line-height:1.7}main{max-width:820px;margin:0 auto;padding:28px 20px 60px}a{color:#C86A10}h1{font-size:28px}h2{font-size:20px;margin-top:32px}table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}th,td{border:1px solid #EAD8C4;padding:8px;text-align:left;vertical-align:top}th{background:#FBE6CF}</style></head>
+<body><main><p><a href="./">← CheetahCam</a></p><h1>CheetahCam Privacy Policy</h1>
+<p>Effective: November 18, 2026 · Operator: CheetahCam Team · Contact: dhoguider@gmail.com</p>
+<p>CheetahCam is built so that <strong>video, audio and images are never stored on the operator's servers.</strong></p>
+<h2>1. Data that stays on your devices only</h2>
+<ul>
+<li>Live video/audio: sent only over an end-to-end encrypted direct connection (WebRTC, DTLS-SRTP) between your paired devices.</li>
+<li>Motion recordings and thumbnails (only if you turn this on): stored encrypted on the camera device for up to 3 days (7 days with CheetahCam Plus).</li>
+<li>Activity log ("Today's diary"): per-minute motion counts, stored encrypted on the camera device for 14 days (30 days with CheetahCam Plus).</li>
+<li>Notification contents (who, what happened, battery, etc.) and alert settings: end-to-end encrypted on the camera device and readable only on the receiving family device.</li>
+<li>Clips and photos you choose to save (CheetahCam Plus): saved to the viewing device's gallery (CheetahCam album); after that, storage, deletion and backup follow that device and your settings. This never goes through the operator's servers.</li>
+<li>Paired device list, device names and security keys: stored encrypted on each device. Keys cannot leave the device.</li>
+</ul>
+<h2>2. Data we process</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Purpose</th>
+<th>Retention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anonymous account ID (Firebase Anonymous Auth)</td>
+<td>Owning a connection mailbox</td>
+<td>Until uninstall</td>
+</tr>
+<tr>
+<td>Device ID (public-key hash), encrypted connection messages, timestamps</td>
+<td>Establishing device-to-device connections (contents are end-to-end encrypted)</td>
+<td>Deleted as soon as the receiving device reads it; unread messages (still encrypted) are deleted when that device reconnects</td>
+</tr>
+<tr>
+<td>Push token (Firebase Cloud Messaging)</td>
+<td>Delivering notifications to family devices</td>
+<td>Until the token changes or expires</td>
+</tr>
+<tr>
+<td>Encrypted notifications, sending camera's device ID, timestamps</td>
+<td>Delivering notifications (contents are end-to-end encrypted)</td>
+<td>Deleted as soon as delivered</td>
+</tr>
+<tr>
+<td>Camera online status (anonymous account ID, device ID, on/off, time) and pre-encrypted "offline / back online" notifications</td>
+<td>Alerting family when the camera goes offline unexpectedly</td>
+<td>Only the latest value is kept (overwritten)</td>
+</tr>
+<tr>
+<td>Per-device hourly notification count</td>
+<td>Preventing excessive notifications</td>
+<td>Overwritten hourly</td>
+</tr>
+<tr>
+<td>Purchase status (Google Play Billing)</td>
+<td>Applying CheetahCam Plus (payment details are handled by Google and never reach the app)</td>
+<td>While the purchase is valid</td>
+</tr>
+<tr>
+<td>App usage events, app instance ID, device model/OS, coarse location from IP (Google Analytics for Firebase)</td>
+<td>Quality improvement, usage statistics</td>
+<td>2 months</td>
+</tr>
+<tr>
+<td>Device information, IP address (Google AdMob)</td>
+<td>Non-personalized ads (banners on the viewer's camera list and settings screens; rewarded ads shown only when you tap the button)</td>
+<td>Per Google policy</td>
+</tr>
+<tr>
+<td>Crash location (error traces), installation ID, device model/OS (Firebase Crashlytics) — never includes video, audio or message content</td>
+<td>Finding and fixing errors</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td>App integrity signals (Firebase App Check / Play Integrity)</td>
+<td>Blocking tampered apps</td>
+<td>Per Google policy</td>
+</tr>
+</tbody>
+</table>
+<p>We do not use the advertising ID and do not show personalized ads.</p>
+<h2>3. Processors and international transfer</h2>
+<p>Google LLC provides Firebase (Firestore and Cloud Functions in the Seoul region, asia-northeast3; Realtime Database for camera online status in Singapore, asia-southeast1), Cloud Messaging, Analytics, Crashlytics, AdMob and App Check. Some data may be processed in the United States.</p>
+<h2>4. Your choices</h2>
+<p>Delete recordings, unpair devices or reset the camera at any time in the app. Uninstalling removes all on-device data.</p>
+<h2>5. Children</h2>
+<p>The app is not directed to children under 14 (or the minimum age in your country).</p>
+<h2>6. Responsibilities of camera owners</h2>
+<p>Tell people in the monitored space that a camera is operating. Listening to other people's private conversations without consent may be illegal. Sound is off by default and recordings contain no audio.</p>
+<h2>7. Contact</h2>
+<p>CheetahCam Team · dhoguider@gmail.com</p></main></body></html>
