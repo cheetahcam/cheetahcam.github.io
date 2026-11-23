@@ -49,6 +49,14 @@ h2{font-size:clamp(26px,4vw,36px);margin:0 0 8px;letter-spacing:-.02em;text-wrap
 .shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 20px 18px;margin:0 -20px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
 .shots img{flex:0 0 auto;width:220px;border-radius:18px;scroll-snap-align:center;box-shadow:0 8px 24px rgba(120,60,0,.18)}
 .hint{color:var(--sub);font-size:13px;margin-top:4px}
+.shotbox{position:relative}
+.shots.drag{scroll-snap-type:none;cursor:grabbing}
+.shots img{-webkit-user-drag:none;user-select:none}
+.arr{display:none;position:absolute;top:50%;transform:translateY(-60%);z-index:2;width:46px;height:46px;border-radius:50%;border:0;background:#fff;color:var(--o);font-size:22px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(120,60,0,.25)}
+.arr:hover{background:var(--o);color:#fff}
+.arr.l{left:-6px}.arr.r{right:-6px}
+.arr:disabled{opacity:.3;cursor:default}
+@media (hover:hover) and (pointer:fine){.arr{display:block}.shots{cursor:grab}}
 .safe{background:var(--deep);color:#fff}
 .safe .lead{color:#D9C4B0}
 .safe .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
@@ -110,7 +118,7 @@ html[lang=ko] [data-l=ko],html[lang=en] [data-l=en]{display:inline}
 <section id="screens" style="padding-top:0"><div class="wrap">
  <h2><span data-l="ko">실제 앱 화면</span><span data-l="en">Inside the app</span></h2>
  <p class="lead"><span data-l="ko">보는 폰에서는 이렇게 보여요</span><span data-l="en">Here is what you will see</span></p>
- <div class="shots" id="shots"></div>
+ <div class="shotbox"><button class="arr l" id="prev" aria-label="이전">‹</button><div class="shots" id="shots"></div><button class="arr r" id="next" aria-label="다음">›</button></div>
  <p class="hint"><span data-l="ko">← 옆으로 넘겨 보세요 →</span><span data-l="en">← Swipe to see more →</span></p>
 </div></section>
 
@@ -143,13 +151,29 @@ function setLang(l){
  document.getElementById('b-en').className=l==='en'?'on':'';
  document.querySelectorAll('img.shot').forEach(function(i){i.src='img/'+l+'/'+i.dataset.n+'.jpg'});
  var s=document.getElementById('shots');s.innerHTML='';
- for(var n=1;n<=8;n++){var im=document.createElement('img');im.loading='lazy';im.decoding='async';im.alt='';im.src='img/'+l+'/0'+n+'.jpg';s.appendChild(im)}
+ for(var n=1;n<=8;n++){var im=document.createElement('img');im.loading='lazy';im.decoding='async';im.draggable=false;im.alt='';im.src='img/'+l+'/0'+n+'.jpg';s.appendChild(im)}
  document.getElementById('pp').href='privacy-'+l+'.html';
  document.title=l==='ko'?'치타캠 · CheetahCam — 쓰던 폰이 펫캠으로':'CheetahCam — Your spare phone, now a pet cam';
  try{localStorage.setItem('lang',l)}catch(e){}
 }
 var L=null;try{L=localStorage.getItem('lang')}catch(e){}
 setLang(L||((navigator.language||'').toLowerCase().indexOf('ko')===0?'ko':'en'));
+// PC: 화살표 버튼과 마우스로 끌어서 넘기기
+(function(){
+ var s=document.getElementById('shots'),pv=document.getElementById('prev'),nx=document.getElementById('next');
+ function step(){var i=s.querySelector('img');return i?i.offsetWidth+16:240}
+ function upd(){pv.disabled=s.scrollLeft<4;nx.disabled=s.scrollLeft>s.scrollWidth-s.clientWidth-4}
+ pv.onclick=function(){s.scrollBy({left:-step(),behavior:'smooth'})};
+ nx.onclick=function(){s.scrollBy({left:step(),behavior:'smooth'})};
+ s.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);setTimeout(upd,300);
+ var down=false,x0=0,l0=0,moved=false;
+ s.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;down=true;moved=false;x0=e.clientX;l0=s.scrollLeft;s.classList.add('drag');s.setPointerCapture(e.pointerId)});
+ s.addEventListener('pointermove',function(e){if(!down)return;var d=e.clientX-x0;if(Math.abs(d)>3)moved=true;s.scrollLeft=l0-d});
+ function end(){if(!down)return;down=false;var t=s.scrollLeft;s.classList.remove('drag');
+  var st=step(),k=Math.round(t/st);s.scrollLeft=t;s.scrollTo({left:k*st,behavior:'smooth'})}
+ s.addEventListener('pointerup',end);s.addEventListener('pointercancel',end);
+ s.addEventListener('click',function(e){if(moved){e.preventDefault();e.stopPropagation()}},true);
+})();
 </script>
 </body>
 </html>
